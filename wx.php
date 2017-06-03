@@ -7,13 +7,14 @@
 define("TOKEN", "weixin2017");
 $wechatObj = new wechatCallbackapiTest();
 
-if ($_GET['echostr'])
+if (isset($_GET['echostr']))
 {
-    $this->valid();
+    $wechatObj->valid();
 }
 else
 {
-    $this->responseMsg();
+    // 接收微信服务器发送过来的xml
+    $wechatObj->responseMsg();
 }
 
 $wechatObj->valid();
@@ -34,7 +35,16 @@ class wechatCallbackapiTest
     public function responseMsg()
     {
         //get post data, May be due to the different environments
-        $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
+        // $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];          // POST数据
+        // 5.6 $GLOBALS     7.0   file_get_contents()
+        // file_put_contents('data.txt', $postStr);
+        $postStr = file_get_contents("php://input");
+
+        include './db.php';
+        $data = array(
+            'xml' => $postStr,
+        );
+        $database->insert('xml', $data);
 
         //extract post data
         if (!empty($postStr)){
@@ -42,18 +52,21 @@ class wechatCallbackapiTest
                the best way is to check the validity of xml by yourself */
             libxml_disable_entity_loader(true);
             $postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
+
+
+
             $fromUsername = $postObj->FromUserName;
             $toUsername = $postObj->ToUserName;
             $keyword = trim($postObj->Content);
             $time = time();
             $textTpl = "<xml>
-							<ToUserName><![CDATA[%s]]></ToUserName>
-							<FromUserName><![CDATA[%s]]></FromUserName>
-							<CreateTime>%s</CreateTime>
-							<MsgType><![CDATA[%s]]></MsgType>
-							<Content><![CDATA[%s]]></Content>
-							<FuncFlag>0</FuncFlag>
-							</xml>";
+                            <ToUserName><![CDATA[%s]]></ToUserName>
+                            <FromUserName><![CDATA[%s]]></FromUserName>
+                            <CreateTime>%s</CreateTime>
+                            <MsgType><![CDATA[%s]]></MsgType>
+                            <Content><![CDATA[%s]]></Content>
+                            <FuncFlag>0</FuncFlag>
+                            </xml>";
             if(!empty( $keyword ))
             {
                 $msgType = "text";
