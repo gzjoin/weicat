@@ -46,6 +46,9 @@ class wechatCallbackapiTest
         );
         $database->insert('xml', $data);
 
+
+
+
         //extract post data
         if (!empty($postStr)){
             /* libxml_disable_entity_loader is to prevent XML eXternal Entity Injection,
