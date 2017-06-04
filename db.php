@@ -10,7 +10,11 @@ $database = new \Medoo\Medoo([
     'password' => '123456',
     'charset' => 'utf8',
 
+<<<<<<< HEAD
     // 可选参数
+=======
+       // 可选参数
+>>>>>>> 1bd32ee3663d0391ed1aee90a08b98b033400e2f
     'port' => 3306,
 
     // 可选，定义表的前缀

@@ -39,6 +39,17 @@ class wechatCallbackapiTest
         // 5.6 $GLOBALS     7.0   file_get_contents()
         // file_put_contents('data.txt', $postStr);
         $postStr = file_get_contents("php://input");
+<<<<<<< HEAD
+=======
+
+        include './db.php';
+        $data = array(
+            'xml' => $postStr,
+        );
+        $database->insert('xml', $data);
+
+
+>>>>>>> 1bd32ee3663d0391ed1aee90a08b98b033400e2f
 
         include './db.php';
         $data = array(
