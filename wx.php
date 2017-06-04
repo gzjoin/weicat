@@ -1,11 +1,8 @@
 <?php
-/**
- * wechat php test
- */
 
 //define your token
 define("TOKEN", "weixin2017");
-$wechatObj = new wechatCallbackapiTest();
+$wechatObj = new wxModel();
 
 if (isset($_GET['echostr']))
 {
@@ -19,8 +16,11 @@ else
 
 $wechatObj->valid();
 
-class wechatCallbackapiTest
+class wxModel
 {
+    /*
+     *  接口配置信息的验证
+     * */
     public function valid()
     {
         $echoStr = $_GET["echostr"];
@@ -31,26 +31,13 @@ class wechatCallbackapiTest
             exit;
         }
     }
-
+    /*
+     * 微信发送消息 ， 开发者服务型接收xml格式的数据
+     * */
     public function responseMsg()
     {
-        //get post data, May be due to the different environments
-        // $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];          // POST数据
-        // 5.6 $GLOBALS     7.0   file_get_contents()
-        // file_put_contents('data.txt', $postStr);
+
         $postStr = file_get_contents("php://input");
-<<<<<<< HEAD
-=======
-
-        include './db.php';
-        $data = array(
-            'xml' => $postStr,
-        );
-        $database->insert('xml', $data);
-
-
->>>>>>> 1bd32ee3663d0391ed1aee90a08b98b033400e2f
-
         include './db.php';
         $data = array(
             'xml' => $postStr,
@@ -62,14 +49,19 @@ class wechatCallbackapiTest
             /* libxml_disable_entity_loader is to prevent XML eXternal Entity Injection,
                the best way is to check the validity of xml by yourself */
             libxml_disable_entity_loader(true);
+            /*
+             * 接收微信服务器发送过来的数据 ，根据文本 ，图片 ， 等数据分类
+             * */
             $postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
 
-
-
-            $fromUsername = $postObj->FromUserName;
-            $toUsername = $postObj->ToUserName;
-            $keyword = trim($postObj->Content);
+            $tousername = $postobj->ToUserName;
+            $fromusername = $postobj->FromUserName;
             $time = time();
+            $msgtype = $postobj->MsgType;
+            $Content = "欢迎来到微信开发的世界__gzjoin";
+
+
+            //发现消息的xml模板
             $textTpl = "<xml>
                             <ToUserName><![CDATA[%s]]></ToUserName>
                             <FromUserName><![CDATA[%s]]></FromUserName>
@@ -78,22 +70,19 @@ class wechatCallbackapiTest
                             <Content><![CDATA[%s]]></Content>
                             <FuncFlag>0</FuncFlag>
                             </xml>";
-            if(!empty( $keyword ))
-            {
-                $msgType = "text";
-                $contentStr = "Welcome to wechat world!";
-                $resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
-                echo $resultStr;
-            }else{
-                echo "Input something...";
-            }
+            $time = time();
+            $msgtype = 'text';
+            $Content = "欢迎来到微信开发的世界__gzjoin";
+            $res = sprintf($textTpl, $fromusername, $tousername, $time, $msgtype, $Content);
 
         }else {
             echo "";
             exit;
         }
     }
-
+    /*
+     *  验证服务器地址的有效性
+     * */
     private function checkSignature()
     {
         /*

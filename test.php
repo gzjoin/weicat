@@ -26,3 +26,19 @@ $picurl = $postobj->PicUrl;
 $mediatd = $postobj->MediaId;
 $msgid = $postobj->MsgId;
 
+
+$textTpl = <<<EOT
+<xml>
+    <ToUserName><![CDATA[%s]]></ToUserName>
+    <FromUserName><![CDATA[%s]]></FromUserName>
+    <CreateTime>%s</CreateTime>
+    <MsgType><![CDATA[%s]]></MsgType>
+    <Content><![CDATA[%s]]></Content>
+</xml>
+EOT;
+$time = time();
+$msgtype = 'text';
+$Content = "欢迎来到微信开发的世界__gzjoin";
+$res = sprintf($textTpl, $fromusername, $tousername, $time, $msgtype, $Content);
+
+var_dump($res);
