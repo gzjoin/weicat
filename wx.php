@@ -54,10 +54,10 @@ class wxModel
              * */
             $postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
 
-            $tousername = $postobj->ToUserName;
-            $fromusername = $postobj->FromUserName;
+            $tousername = $postObj->ToUserName;
+            $fromusername = $postObj->FromUserName;
             $time = time();
-            $msgtype = $postobj->MsgType;
+            $msgtype = $postObj->MsgType;
             $content = "欢迎来到微信开发的世界__gzjoin";
 
 
