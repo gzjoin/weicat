@@ -58,7 +58,7 @@ class wxModel
             $fromusername = $postobj->FromUserName;
             $time = time();
             $msgtype = $postobj->MsgType;
-            $Content = "欢迎来到微信开发的世界__gzjoin";
+            $content = "欢迎来到微信开发的世界__gzjoin";
 
 
             //发现消息的xml模板
@@ -72,9 +72,9 @@ class wxModel
                             </xml>";
             $time = time();
             $msgtype = 'text';
-            $Content = "欢迎来到微信开发的世界__gzjoin";
-            $res = sprintf($textTpl, $fromusername, $tousername, $time, $msgtype, $Content);
-
+            $content = "欢迎来到微信开发的世界__gzjoin";
+            $res = sprintf($textTpl, $fromusername, $tousername, $time, $msgtype, $content);
+            echo $res;
         }else {
             echo "";
             exit;
