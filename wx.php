@@ -118,7 +118,23 @@ EOT;
                     echo $res;
                 }
                 if ($keyword == "科比") {
+                    $textTpl = <<<EOT
+                    <xml>
+                    <ToUserName><![CDATA[%s]]></ToUserName>
+                    <FromUserName><![CDATA[%s]]></FromUserName>
+                    <CreateTime>%s</CreateTime>
+                    <MsgType><![CDATA[%s]]></MsgType>
+                    <Image>
+                    <MediaId><![CDATA[%s]]></MediaId>
+                    </Image>
+                    </xml>
 
+EOT;
+                    $time = time();
+                    $msgtype = 'image';
+                    $mediaid = "fmTWnWW5y6gEcspIvrYfh5sMrHGJ1ocl8Zgf5PhUXfzY5JBRwt7hMNxWBXLHPcf2";
+                    $res = sprintf($textTpl, $fromusername, $tousername, $time, $msgtype, $mediaid);
+                    echo $res;
                 }
             }
 

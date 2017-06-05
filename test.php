@@ -62,6 +62,7 @@ $textTpl = <<<EOT
 </xml>
 
 EOT;
+
 //$str = "";
 //foreach ($arr as $v) {
 //    $str .= "<item>";
@@ -80,7 +81,7 @@ $time = time();
 $msgtype = 'image';
 $nums = count($arr);
 $Content = "欢迎来到微信开发的世界__gzjoin";
-$mediaid = "";
-$res = sprintf($textTpl, $fromusername, $tousername, $time, $msgtype, $nums);
+$mediaid = "fmTWnWW5y6gEcspIvrYfh5sMrHGJ1ocl8Zgf5PhUXfzY5JBRwt7hMNxWBXLHPcf2";
+$res = sprintf($textTpl, $fromusername, $tousername, $time, $msgtype, $mediaid);
 
 var_dump($res);
