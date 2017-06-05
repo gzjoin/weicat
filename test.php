@@ -56,28 +56,31 @@ $textTpl = <<<EOT
 <FromUserName><![CDATA[%s]]></FromUserName>
 <CreateTime>%s</CreateTime>
 <MsgType><![CDATA[%s]]></MsgType>
-<ArticleCount>%s</ArticleCount>
-<Articles>
+<Image>
+<MediaId><![CDATA[%s]]></MediaId>
+</Image>
+</xml>
 
 EOT;
-$str = "";
-foreach ($arr as $v) {
-    $str .= "<item>";
-        $str .= "<Title><![CDATA[".$v['title']."]]></Title>";
-        $str .= "<Description><![CDATA[".$v['description']."]]></Description>";
-        $str .= "<PicUrl><![CDATA[".$v['pucurl']."]]></PicUrl>";
-        $str .= "<Url><![CDATA[".$v['url']."]]></Url>";
-    $str .= "</item>";
-}
-
-$textTpl .= $str;
-$textTpl .= "</Articles></xml>";
+//$str = "";
+//foreach ($arr as $v) {
+//    $str .= "<item>";
+//        $str .= "<Title><![CDATA[".$v['title']."]]></Title>";
+//        $str .= "<Description><![CDATA[".$v['description']."]]></Description>";
+//        $str .= "<PicUrl><![CDATA[".$v['pucurl']."]]></PicUrl>";
+//        $str .= "<Url><![CDATA[".$v['url']."]]></Url>";
+//    $str .= "</item>";
+//}
+//
+//$textTpl .= $str;
+//$textTpl .= "</Articles></xml>";
 
 
 $time = time();
-$msgtype = 'news';
+$msgtype = 'image';
 $nums = count($arr);
 $Content = "欢迎来到微信开发的世界__gzjoin";
+$mediaid = "";
 $res = sprintf($textTpl, $fromusername, $tousername, $time, $msgtype, $nums);
 
 var_dump($res);

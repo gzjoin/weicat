@@ -117,6 +117,9 @@ EOT;
                     $res = sprintf($textTpl, $fromusername, $tousername, $time, $msgtype, $nums);
                     echo $res;
                 }
+                if ($keyword == "科比") {
+
+                }
             }
 
             $time = time();
