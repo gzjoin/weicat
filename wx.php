@@ -132,7 +132,7 @@ EOT;
 EOT;
                     $time = time();
                     $msgtype = 'image';
-                    $mediaid = "fmTWnWW5y6gEcspIvrYfh5sMrHGJ1ocl8Zgf5PhUXfzY5JBRwt7hMNxWBXLHPcf2";
+                    $mediaid = "doDrbIZfgBBapXnoqoZlkXkUCgpD5P7jkE9MzbFYG1MG1DSDxiU-VuYzGSk0JrAU";
                     $res = sprintf($textTpl, $fromusername, $tousername, $time, $msgtype, $mediaid);
                     echo $res;
                 }
