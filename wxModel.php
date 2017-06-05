@@ -240,9 +240,13 @@ EOT;
             $appsecret = "952ce89ced50797636b73b44b04efce0";
 
             $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=".$appid."&secret=".$appsecret;
-            $access_token = $this->jsonToArray($this->getData($url));
+
+            $access_token = $this->jsonToArray($this->getData($url))['access_token'];
+
             $_SESSION['access_token'] = $access_token;
+
             $_SESSION['expire_time'] = time();
+
             return $access_token;
         }
 
