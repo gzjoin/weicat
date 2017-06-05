@@ -5,7 +5,7 @@
     $model = new wxModel();
 
     echo $model->getAccesstoken();
-
+    die();
     $poststr = <<<EOT
 <xml>
  <ToUserName><![CDATA[toUser]]></ToUserName>
