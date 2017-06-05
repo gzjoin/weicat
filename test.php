@@ -17,13 +17,13 @@
  <MsgId>1234567890123456</MsgId>
  </xml>
 EOT;
-var_dump($poststr);
+//var_dump($poststr);
 
 //file_put_contents("data.txt" , $poststr);
 
 $postobj = simplexml_load_string($poststr, "SimpleXMLElement", LIBXML_NOCDATA);
 
-var_dump($postobj);
+//var_dump($postobj);
 
 $tousername = $postobj->ToUserName;
 $fromusername = $postobj->FromUserName;
@@ -91,4 +91,4 @@ $Content = "欢迎来到微信开发的世界__gzjoin";
 $mediaid = "fmTWnWW5y6gEcspIvrYfh5sMrHGJ1ocl8Zgf5PhUXfzY5JBRwt7hMNxWBXLHPcf2";
 $res = sprintf($textTpl, $fromusername, $tousername, $time, $msgtype, $mediaid);
 
-var_dump($res);
+//var_dump($res);
