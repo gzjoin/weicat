@@ -1,4 +1,11 @@
 <?php
+
+    include "./wxModel.php";
+
+    $model = new wxModel();
+
+    echo $model->getAccesstoken();
+
     $poststr = <<<EOT
 <xml>
  <ToUserName><![CDATA[toUser]]></ToUserName>
@@ -12,7 +19,7 @@
 EOT;
 var_dump($poststr);
 
-file_put_contents("data.txt" , $poststr);
+//file_put_contents("data.txt" , $poststr);
 
 $postobj = simplexml_load_string($poststr, "SimpleXMLElement", LIBXML_NOCDATA);
 
