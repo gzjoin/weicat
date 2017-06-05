@@ -136,7 +136,7 @@ EOT;
                     $res = sprintf($textTpl, $fromusername, $tousername, $time, $msgtype, $mediaid);
                     echo $res;
                 }
-                if ($keyword == "event") {
+                if ($msgtype == "event") {
                     $event = $postObj->Event;
                     //订阅
                     if ($event == "subscribe") {
@@ -160,6 +160,20 @@ EOT;
             $time = time();
             $msgtype = $postObj->MsgType;
             $content = "欢迎来到微信开发的世界__gzjoin";
+
+            $textTpl = "<xml>
+                            <ToUserName><![CDATA[%s]]></ToUserName>
+                            <FromUserName><![CDATA[%s]]></FromUserName>
+                            <CreateTime>%s</CreateTime>
+                            <MsgType><![CDATA[%s]]></MsgType>
+                            <Content><![CDATA[%s]]></Content>
+                            <FuncFlag>0</FuncFlag>
+                            </xml>";
+            $time = time();
+            $msgtype = 'text';
+            $content = "欢迎来到微信开发的世界__gzjoin";
+            $res = sprintf($textTpl, $fromusername, $tousername, $time, $msgtype, $content);
+            echo $res;
         }else {
             echo "";
             exit;
