@@ -1,11 +1,9 @@
 <?php
 
 include './wxModel.php';
-
-    $model = new wxModel();
-
-    echo $model->getAccessToken();
-    die();
+$model = new wxModel();
+echo $model->getAccessToken();
+    die;
     $poststr = <<<EOT
 <xml>
  <ToUserName><![CDATA[toUser]]></ToUserName>
