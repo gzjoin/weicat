@@ -145,7 +145,7 @@ EOT;
                 if ($event == "CLICK") {
 
                     //判断到底是哪一种菜单
-                    $key = $postObj->Eventkey;
+                    $key = $postObj->EventKey;
 
                     if ($key == '20000') {
                         //订阅后发现消息的xml模板
