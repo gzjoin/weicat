@@ -120,6 +120,24 @@ EOT;
                     echo $res;
                 }
 
+                if (substr($keyword, 0, 6) == "天气") {
+                    $city = substr($keyword, 6, strlen($keyword));
+                    $str = $this->getWeather($city);
+                    //发送天气
+                    $textTpl = "<xml>
+                            <ToUserName><![CDATA[%s]]></ToUserName>
+                            <FromUserName><![CDATA[%s]]></FromUserName>
+                            <CreateTime>%s</CreateTime>
+                            <MsgType><![CDATA[%s]]></MsgType>
+                            <Content><![CDATA[%s]]></Content>
+                            <FuncFlag>0</FuncFlag>
+                            </xml>";
+                    $time = time();
+                    $msgtype = 'text';
+                    $content = $str;
+                    $res = sprintf($textTpl, $fromusername, $tousername, $time, $msgtype, $content);
+                    echo $res;
+                }
             }
 
             if ($msgtype == "event") {
@@ -341,5 +359,12 @@ EOT;
             $_SESSION['expire_time'] = time();
             return $access_token;
         }
+    }
+
+    public function getWeather($city)
+    {
+        $appkey = "f177d8c486fd0b6f240301550ad56c6c";
+        $url = "http://v.juhe.cn/weather/index?format=2&cityname=".$city."&key=".$appkey;
+        return $this->getData($url);
     }
 }
