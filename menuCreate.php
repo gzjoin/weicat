@@ -21,7 +21,7 @@ $arr = array(
                 ),
                 array(
                     "type" => "click",
-                    "name" => urlencode("关注我们"),
+                    "name" => urlencode("帮助信息"),
                     "key" => "40000",
                 ),
                 array(
