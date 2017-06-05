@@ -136,13 +136,12 @@ EOT;
                     $res = sprintf($textTpl, $fromusername, $tousername, $time, $msgtype, $mediaid);
                     echo $res;
                 }
-            }
-
-            $time = time();
-            $msgtype = $postObj->MsgType;
-            $content = "欢迎来到微信开发的世界__gzjoin";
-            //发现消息的xml模板
-            $textTpl = "<xml>
+                if ($keyword == "event") {
+                    $event = $postObj->Event;
+                    //订阅
+                    if ($event == "subscribe") {
+                        //订阅后发现消息的xml模板
+                        $textTpl = "<xml>
                             <ToUserName><![CDATA[%s]]></ToUserName>
                             <FromUserName><![CDATA[%s]]></FromUserName>
                             <CreateTime>%s</CreateTime>
@@ -150,11 +149,17 @@ EOT;
                             <Content><![CDATA[%s]]></Content>
                             <FuncFlag>0</FuncFlag>
                             </xml>";
+                        $time = time();
+                        $msgtype = 'text';
+                        $content = "欢迎来到微信开发的世界__gzjoin, 可以输入关键字查看往前内容！！ 如：科比 ， 篮球";
+                        $res = sprintf($textTpl, $fromusername, $tousername, $time, $msgtype, $content);
+                        echo $res;
+                    }
+                }
+            }
             $time = time();
-            $msgtype = 'text';
+            $msgtype = $postObj->MsgType;
             $content = "欢迎来到微信开发的世界__gzjoin";
-            $res = sprintf($textTpl, $fromusername, $tousername, $time, $msgtype, $content);
-            echo $res;
         }else {
             echo "";
             exit;
