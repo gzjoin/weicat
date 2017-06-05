@@ -2,7 +2,7 @@
 
 include './wxModel.php';
 $model = new wxModel();
-echo $model->getAccesstoken();
+echo $model->getAccessToken();
 die;
     $poststr = <<<EOT
 <xml>

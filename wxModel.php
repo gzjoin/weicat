@@ -201,7 +201,8 @@ EOT;
     /*
      * curl 请求 ， 返回数据
      * */
-    public function getData($url) {
+    public function getData($url, $method="GET", $arr="")
+    {
         // 1. cURL初始化
         $ch = curl_init();
 
@@ -215,6 +216,10 @@ EOT;
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
 
+        if (strtoupper($method) == "POST") {
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $arr);
+        }
         // 3. 执行cURL请求
         $ret = curl_exec($ch);
 
@@ -224,27 +229,32 @@ EOT;
         return $ret;
     }
 
-    public function jsonToArray($json) {
+    /*
+     * JSON 转化为数组
+     * */
+    public function jsonToArray($json)
+    {
         $arr = json_decode($json, 1);
-        return $arr['access_token'];
+        return $arr;
     }
 
-    public function getAccesstoken() {
-
+    public function getAccessToken(){
+        // redis  memcache SESSION
         session_start();
-        if ($_SESSION['access_token'] && (time()-$_SESSION['expire_time']) < 7000 ) {
+
+        if ($_SESSION['access_token'] && (time()-$_SESSION['expire_time']) < 7000 )
+        {
             return $_SESSION['access_token'];
         } else {
             $appid = "wx499a9af85a5d4fe2";
             $appsecret = "952ce89ced50797636b73b44b04efce0";
+
             $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=".$appid."&secret=".$appsecret;
+            $access_token = $this->jsonToArray($this->getData($url))['access_token'];
 
-
-            $access_token = $this->jsonToArray($this->getData($url));
+            // 写入SESSION
             $_SESSION['access_token'] = $access_token;
-
             $_SESSION['expire_time'] = time();
-
             return $access_token;
         }
     }
