@@ -12,7 +12,7 @@ $arr = array(
             "key" => "20000",
         ),
         array(
-            "name"=>urlencode("下拉菜单"),
+            "name" => urlencode("下拉菜单"),
             "sub_button" => array(
                 array(
                     "type" => "click",
@@ -25,7 +25,7 @@ $arr = array(
                     "key" => "40000",
                 ),
                 array(
-                    "type" => "viwe",
+                    "type" => "view",
                     "name" => urlencode("我的商城"),
                     "url" => "https://www.baidu.com",
                 ),
@@ -38,11 +38,11 @@ $arr = array(
         ),
     ),
 );
-$arrjson = urldecode(json_encode($arr));
+$json = urldecode(json_encode($arr));
 //访问接口
 
-$url = " https://api.weixin.qq.com/cgi-bin/menu/create?access_token=".$wxobj->getAccessToken();
+$url = "https://api.weixin.qq.com/cgi-bin/menu/create?access_token=".$wxobj->getAccessToken();
 
-$res = $wxobj->getData($url,"POST", $arrjson);
+$res = $wxobj->getData($url,'POST', $json);
 
 echo $res;

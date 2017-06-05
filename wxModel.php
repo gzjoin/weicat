@@ -201,7 +201,7 @@ EOT;
     /*
      * curl 请求 ， 返回数据
      * */
-    public function getData($url, $method="GET", $arr="")
+    public function getData($url, $method='GET', $arr='')
     {
         // 1. cURL初始化
         $ch = curl_init();
@@ -215,11 +215,11 @@ EOT;
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-
-        if (strtoupper($method) == "POST") {
+        if (strtoupper($method) == 'POST') {
             curl_setopt($ch, CURLOPT_POST, 1);
             curl_setopt($ch, CURLOPT_POSTFIELDS, $arr);
         }
+
         // 3. 执行cURL请求
         $ret = curl_exec($ch);
 
